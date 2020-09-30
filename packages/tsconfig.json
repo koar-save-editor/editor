@@ -1,0 +1,9 @@
+{
+  "files": [],
+  "references": [
+    { "path": "core" },
+    { "path": "editor" },
+    { "path": "main-process" },
+    { "path": "webpack" }
+  ]
+}

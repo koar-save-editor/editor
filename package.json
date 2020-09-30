@@ -15,7 +15,8 @@
     }
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "transpile": "tsc -b packages/tsconfig.json",
+    "clean": "lerna run clean --parallel"
   },
   "repository": {
     "type": "git",
