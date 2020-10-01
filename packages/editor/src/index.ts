@@ -1,3 +1,3 @@
-import { X } from '@koar/core';
+import { amalur } from '@koar/core';
 
-console.log(X);
+console.log(amalur.findGameSaveDirectory());
