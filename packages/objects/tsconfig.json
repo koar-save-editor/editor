@@ -1,9 +1,10 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "composite": true,
     "outDir": "lib",
     "rootDir": "src"
   },
   "exclude": ["lib"],
-  "references": [{ "path": "shared" }]
+  "references": [{ "path": "../shared" }]
 }

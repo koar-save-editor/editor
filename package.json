@@ -10,6 +10,10 @@
   "author": "Amir Burbea <amir.burbea@gmail.com>",
   "contributors": [
     {
+      "email": "amir.burbea@gmail.com",
+      "name": "Amir Burbea"
+    },
+    {
       "email": "michaelburbea@gmail.com",
       "name": "Michael Burbea"
     }
@@ -20,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@ssh.dev.azure.com:v3/northrock/widgets/widgets"
+    "url": "https://github.com/koar-save-editor/editor"
   },
   "license": "MIT",
   "dependencies": {},
