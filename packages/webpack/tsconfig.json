@@ -2,8 +2,8 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "module": "commonjs",
-    "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "outFile": "webpack.config.js"
   },
   "exclude": ["lib"]
 }

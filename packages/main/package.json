@@ -1,5 +1,5 @@
 {
-  "name": "@koar/main-process",
+  "name": "@koar/main",
   "version": "4.0.0",
   "description": "KoAR Save Editor (Electron) Main Process",
   "main": "lib/index.js",

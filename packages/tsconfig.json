@@ -2,7 +2,7 @@
   "files": [],
   "references": [
     { "path": "editor" },
-    { "path": "main-process" },
+    { "path": "main" },
     { "path": "objects" },
     { "path": "shared" },
     { "path": "webpack" }
