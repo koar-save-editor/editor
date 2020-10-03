@@ -1,7 +1,7 @@
 {
   "name": "@koar/shared",
   "version": "4.0.0",
-  "description": "",
+  "description": "Shared package spanning KoAR Save Editor Main and Renderer processes",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {

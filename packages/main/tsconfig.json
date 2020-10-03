@@ -5,5 +5,5 @@
     "rootDir": "src"
   },
   "exclude": ["lib"],
-  "references": [{ "path": "shared" }]
+  "references": [{ "path": "../shared" }]
 }

@@ -1,4 +1,4 @@
-import { EqualityComparison } from '@widgets/utilities';
+import { EqualityComparison } from '@koar/shared';
 
 /**
  * Function which takes as arguments an immutable `state`, a `property` to update and a
