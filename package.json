@@ -20,7 +20,12 @@
   ],
   "scripts": {
     "transpile": "tsc -b packages/tsconfig.json",
-    "clean": "lerna run clean --parallel"
+    "clean": "lerna run clean --parallel",
+    "pre-build": "lerna run build --stream && yarn transpile && lerna run --parallel --stream copyfiles && shx rm -rf dist",
+    "build": "yarn pre-build && webpack --progress --config packages/webpack/lib/index.js",
+    "launch": "concurrently -k \"electron dist/app\" \"lerna run launch:dev --stream\"",
+    "postinstall": "lerna run postinstall --stream",
+    "start": "yarn build && yarn launch"
   },
   "repository": {
     "type": "git",

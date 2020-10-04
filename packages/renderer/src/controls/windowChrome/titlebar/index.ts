@@ -3,15 +3,11 @@ import { createSelector } from 'reselect';
 import { selectors, StoreState } from '../../../store';
 import { component, TitlebarProps } from './component';
 
-type StateProps = Pick<
-  TitlebarProps,
-  'isDev' | 'fileName' | 'hasUnsavedChanges'
->;
+type StateProps = Pick<TitlebarProps, 'fileName' | 'hasUnsavedChanges'>;
 type OwnProps = {};
 
 const {
   file: { getFileName, getHasUnsavedChanges },
-  attributes: { getEnvironment },
 } = selectors;
 
 const mapStateToProps: MapStateToProps<
@@ -21,11 +17,9 @@ const mapStateToProps: MapStateToProps<
 > = createSelector(
   getFileName,
   getHasUnsavedChanges,
-  getEnvironment,
-  (fileName, hasUnsavedChanges, environment) => ({
+  (fileName, hasUnsavedChanges) => ({
     fileName,
     hasUnsavedChanges,
-    isDev: environment === 'development',
   })
 );
 

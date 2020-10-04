@@ -1,6 +1,6 @@
 import { Dictionary } from '@koar/shared';
 import { handleActions, Reducer, ReducerMap } from 'redux-actions';
-import updateImmutable from './updateImmutable';
+import updateImmutable from './transformImmutable';
 
 /**
  * A large number of redux reducers simply take a set of actions in which the `payload` is

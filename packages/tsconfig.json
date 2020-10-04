@@ -1,9 +1,9 @@
 {
   "files": [],
   "references": [
-    { "path": "editor" },
     { "path": "main" },
     { "path": "objects" },
+    { "path": "renderer" },
     { "path": "shared" },
     { "path": "webpack" }
   ]

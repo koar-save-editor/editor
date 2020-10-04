@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { WindowChrome } from './controls';
 import { createStore } from './store';
 
-const store = createStore();
+const store = await createStore();
 
 render(
   <StrictMode>

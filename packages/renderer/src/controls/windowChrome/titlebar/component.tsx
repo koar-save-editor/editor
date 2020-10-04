@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
 
 export interface TitlebarProps {
-  isDev: boolean;
   fileName?: string;
   hasUnsavedChanges: boolean;
 }
@@ -9,12 +8,11 @@ export interface TitlebarProps {
 export const component: FunctionComponent<TitlebarProps> = ({
   hasUnsavedChanges,
   fileName,
-  isDev,
 }) => {
   const title = useMemo(() => {
     return `${hasUnsavedChanges ? '* ' : ''}${
       fileName ? `${fileName} - ` : ''
-    }KoAR Save Editor${isDev ? ' (DEV)' : ''}`;
+    }KoAR Save Editor${process.env.NODE_ENV === 'development' ? ' (DEV)' : ''}`;
   }, [fileName, hasUnsavedChanges]);
 
   useEffect(() => {
