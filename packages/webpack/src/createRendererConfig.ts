@@ -27,6 +27,9 @@ export default function (
       path: outputPath,
       publicPath: '',
     },
+    resolve: {
+      extensions: ['.js', '.jsx'],
+    },
     node: {
       __dirname: false,
     },

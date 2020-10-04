@@ -16,8 +16,4 @@ const mapStateToProps: MapStateToProps<
   StoreState
 > = createSelector(getThemeName, (themeName): StateProps => ({ themeName }));
 
-type DispatchProps = Omit<WindowChromeProps, keyof (StateProps & OwnProps)>;
-
-const dispatchProps: DispatchProps = {};
-
-export const WindowChrome = connect(mapStateToProps, dispatchProps)(component);
+export const WindowChrome = connect(mapStateToProps)(component);
