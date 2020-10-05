@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "outDir": "lib",
+    "rootDir": "src"
+  },
+  "references": [{ "path": "../objects" }, { "path": "../shared" }],
+  "exclude": ["lib"]
+}
