@@ -1,5 +1,5 @@
 import { Dictionary } from '@koar/shared';
-import { handleActions, Reducer, ReducerMap } from 'redux-actions';
+import { handleActions, ReducerMap } from 'redux-actions';
 import updateImmutable from './transformImmutable';
 
 /**
@@ -17,7 +17,7 @@ export default function createBasicReducer<State extends object>(
   initialState: State,
   propertyMap: Dictionary<keyof State>,
   partial: ReducerMap<State, any> = {}
-): Reducer<State, any> {
+) {
   return handleActions<State, any>(
     Object.entries(propertyMap).reduce<ReducerMap<State, any>>(
       (output, [actionType, key]) => {

@@ -33,6 +33,7 @@ export default function (
     node: {
       __dirname: false,
     },
+    target: 'electron-renderer',
     optimization: {
       concatenateModules: false,
       minimizer:

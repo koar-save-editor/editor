@@ -2,12 +2,13 @@
   "name": "@koar/renderer",
   "version": "4.0.0",
   "description": "KoAR Save Editor (Electron) Renderer Process",
-  "main": "lib/index.js",
+  "main": "lib/index.jsx",
   "types": "lib/index.d.ts",
   "scripts": {
     "clean": "shx rm -rf lib && shx rm -f tsconfig.tsbuildinfo",
     "copyfiles": "copyfiles -V -e \"**/*.ts*\" -u 1 \"src/**/*.*\" lib",
     "prepublishOnly": "yarn run clean && yarn run build && yarn run copyfiles",
+    "launch:dev": "remotedev --hostname=localhost --port=9090",
     "build": "tsc -b"
   },
   "author": "Amir Burbea <amir.burbea@gmail.com>",

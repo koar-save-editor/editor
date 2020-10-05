@@ -8,7 +8,6 @@ import {
   StoreEnhancer,
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-
 import * as reducers from './reducers';
 import defaultSaga from './sagas';
 import { StoreState } from './shapes';

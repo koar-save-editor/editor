@@ -1,5 +1,15 @@
-import { WINDOW_GET_ID } from '@koar/shared';
-import { app, BrowserWindow, ipcMain } from 'electron';
+import {
+  WindowStatus,
+  WINDOW_GET_ID,
+  WINDOW_GET_IS_FOCUSED,
+  WINDOW_GET_STATUS,
+  WINDOW_IS_FOCUSED_CHANGED,
+  WINDOW_MAXIMIZE,
+  WINDOW_MINIMIZE,
+  WINDOW_STATUS_CHANGED,
+  WINDOW_UNMAXIMIZE,
+} from '@koar/shared';
+import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import { platform } from 'os';
 import { join } from 'path';
 import { pathToFileURL } from 'url';
@@ -45,15 +55,70 @@ const createMainWindow = () => {
     minHeight: 200,
     center: true,
   }));
-  const { id } = window;
+  ipcMain.handle(WINDOW_GET_ID, () => window.id);
+  ipcMain.handle(WINDOW_GET_IS_FOCUSED, function () {
+    return window.isVisible() && window.isFocused();
+  });
+  ipcMain.handle(WINDOW_GET_STATUS, function (): WindowStatus {
+    if (!window.isVisible() || window.isMinimized) {
+      return 'minimized';
+    }
+    if (window.isMaximized()) {
+      return 'maximized';
+    }
+    return 'normal';
+  });
 
-  ipcMain.handle(WINDOW_GET_ID, () => id);
+  ipcMain.handle(WINDOW_MAXIMIZE, () => window.maximize());
+  ipcMain.handle(WINDOW_UNMAXIMIZE, () => window.unmaximize());
+  ipcMain.handle(WINDOW_MINIMIZE, () => window.minimize());
 
   const filePath = join(__dirname, 'renderer', 'index.html');
   window.loadURL(pathToFileURL(filePath).toString());
+  const { webContents } = window;
+
+  const onFocusChange = (value: boolean) => () => {
+    webContents.send(WINDOW_IS_FOCUSED_CHANGED, value);
+  };
+  const onStatusChange = (value: WindowStatus) => () => {
+    webContents.send(WINDOW_STATUS_CHANGED, value);
+  };
+  const onFocus = onFocusChange(true);
+  const onBlur = onFocusChange(false);
+  const onMaximize = onStatusChange('maximized');
+  const onMinimize = onStatusChange('minimized');
+  const onNormal = onStatusChange('normal');
+
   window
+    .addListener('focus', onFocus)
+    .addListener('blur', onBlur)
+    .addListener('maximize', onMaximize)
+    .addListener('minimize', onMinimize)
+    .addListener('unmaximize', onNormal)
+    .addListener('restore', onNormal)
     .once('ready-to-show', () => window.show())
-    .once('close', () => {
+    .on('close', function (e) {
+      const choice = dialog.showMessageBoxSync(window, {
+        type: 'question',
+        buttons: ['Yes', 'No'],
+        title: 'Confirm',
+        message: 'Are you sure you want to quit?',
+      });
+      if (choice === 1) {
+        return e.preventDefault();
+      }
+      window
+        .removeListener('focus', onFocus)
+        .removeListener('blur', onBlur)
+        .removeListener('maximize', onMaximize)
+        .removeListener('minimize', onMinimize)
+        .removeListener('unmaximize', onNormal)
+        .removeListener('restore', onNormal);
       ipcMain.removeHandler(WINDOW_GET_ID);
+      ipcMain.removeHandler(WINDOW_GET_IS_FOCUSED);
+      ipcMain.removeHandler(WINDOW_GET_STATUS);
+      ipcMain.removeHandler(WINDOW_MAXIMIZE);
+      ipcMain.removeHandler(WINDOW_UNMAXIMIZE);
+      ipcMain.removeHandler(WINDOW_MINIMIZE);
     });
 };

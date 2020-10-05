@@ -1,5 +1,6 @@
 export const CLOSE = 'WINDOW_CLOSE';
 export const MAXIMIZE = 'WINDOW_MAXIMIZE';
+export const UNMAXIMIZE = 'WINDOW_UNMAXIMIZE';
 export const MINIMIZE = 'WINDOW_MINIMIZE';
 
 export const SET_ID = 'WINDOW_SET_ID';

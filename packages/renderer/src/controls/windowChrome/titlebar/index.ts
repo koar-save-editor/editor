@@ -1,13 +1,17 @@
 import { connect, MapStateToProps } from 'react-redux';
 import { createSelector } from 'reselect';
-import { selectors, StoreState } from '../../../store';
+import { actions, selectors, StoreState } from '../../../store';
 import { component, TitlebarProps } from './component';
 
-type StateProps = Pick<TitlebarProps, 'fileName' | 'hasUnsavedChanges'>;
+type StateProps = Pick<
+  TitlebarProps,
+  'fileName' | 'hasUnsavedChanges' | 'isFocused' | 'status'
+>;
 type OwnProps = {};
 
 const {
   file: { getFileName, getHasUnsavedChanges },
+  window: { getIsFocused, getStatus },
 } = selectors;
 
 const mapStateToProps: MapStateToProps<
@@ -17,14 +21,27 @@ const mapStateToProps: MapStateToProps<
 > = createSelector(
   getFileName,
   getHasUnsavedChanges,
-  (fileName, hasUnsavedChanges) => ({
+  getIsFocused,
+  getStatus,
+  (fileName, hasUnsavedChanges, isFocused, status): StateProps => ({
     fileName,
     hasUnsavedChanges,
+    isFocused,
+    status,
   })
 );
 
 type DispatchProps = Omit<TitlebarProps, keyof (StateProps & OwnProps)>;
 
-const dispatchProps: DispatchProps = {};
+const {
+  window: { close, maximize, minimize, unmaximize },
+} = actions;
+
+const dispatchProps: DispatchProps = {
+  close,
+  maximize,
+  minimize,
+  unmaximize,
+};
 
 export default connect(mapStateToProps, dispatchProps)(component);
